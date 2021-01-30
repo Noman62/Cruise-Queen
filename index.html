@@ -107,7 +107,7 @@
                     </div>
                 </div>
             </div>
-            <button class="btn-style">Book Now</button>
+            <button onclick="myFunction()" class="btn-style">Book Now</button>
         </div>
     </main>
     <script>
@@ -133,7 +133,12 @@
                 increase = number + 1;
             }
             if (isIncrease == false) {
-                increase = number - 1;
+                if (number > 0) {
+                    increase = number - 1;
+                }
+                else {
+                    increase = 0;
+                }
             }
             caseCount.value = increase;
             calculateTotal();
@@ -145,7 +150,12 @@
                 increase = number + 1;
             }
             if (isIncrease == false) {
-                increase = number - 1;
+                if (number > 0) {
+                    increase = number - 1;
+                }
+                else {
+                    increase = 0;
+                }
             }
             secondCaseCount.value = increase;
             calculateTotal();
@@ -161,6 +171,9 @@
             document.getElementById('tax').innerText = '$' + totalTax;
             let grandTotal = Subtotal + totalTax;
             document.getElementById('total').innerText = '$' + grandTotal;
+        }
+        function myFunction() {
+            alert("are you confirm?");
         }
 
     </script>
