@@ -60,22 +60,22 @@
             <div class="input-group f-class">
                 <div>
                     <label for="">First Class ($150)</label>
-                    <input id="first-caseCount" class="inp-style inp-width" type="number" name="" value="0">
+                    <input id="first-classTicket" class="inp-style inp-width" type="number" name="" value="0">
                 </div>
                 <div class="plus-minus-btn">
-                    <p onclick="bookingTicket('first',true)" class="plusBtn">+ </p>
-                    <p onclick="bookingTicket('first',false)" class="plusBtn">-</p>
+                    <p onclick="bookingTicket('first',true)" class="plus-minus">+ </p>
+                    <p onclick="bookingTicket('first',false)" class="plus-minus">-</p>
                 </div>
             </div>
 
             <div class="input-group f-class">
                 <div>
                     <label for="">Economy ($100)</label>
-                    <input id='second-caseCount' class="inp-style inp-width" type="text" name="" value="0">
+                    <input id='second-classTicket' class="inp-style inp-width" type="text" name="" value="0">
                 </div>
                 <div class="plus-minus-btn">
-                    <p onclick="bookingTicket('second',true)" class="plusBtn">+ </p>
-                    <p onclick="bookingTicket('second',false)" class="plusBtn">-</p>
+                    <p onclick="bookingTicket('second',true)" class="plus-minus">+ </p>
+                    <p onclick="bookingTicket('second',false)" class="plus-minus">-</p>
                 </div>
             </div>
             <div class="calculations">
@@ -84,7 +84,7 @@
                         <p>Subtotal</p>
                     </div>
                     <div class="right">
-                        <p><span id="subTotal">500</span>
+                        <p><span id="subTotal">00</span>
                         </p>
                     </div>
                 </div>
@@ -94,7 +94,7 @@
                         <p>Charge 10% VAT</p>
                     </div>
                     <div class="right">
-                        <p><span id="tax">50</span></p>
+                        <p><span id="tax">00</span></p>
                     </div>
                 </div>
                 <hr>
@@ -103,7 +103,7 @@
                         <h4>Total</h4>
                     </div>
                     <div class="right">
-                        <p><span id="total">550</span></p>
+                        <p><span id="total">00</span></p>
                     </div>
                 </div>
             </div>
@@ -112,9 +112,9 @@
         </div>
     </main>
     <script>
-
+        //Calculate number of booking ticket
         function bookingTicket(booking, isIncrease) {
-            let ticketInput = document.getElementById(booking + '-caseCount');
+            let ticketInput = document.getElementById(booking + '-classTicket');
             let numberOfTicket = parseInt(ticketInput.value);
             let totalTicket = numberOfTicket;
             if (isIncrease == true) {
@@ -132,6 +132,7 @@
             totalPriceOfTicket();
         }
 
+        //calculate total ticket price
         function totalPriceOfTicket() {
             let firstClassTicket = getInput('first');
             let secondClassTicket = getInput('second')
@@ -144,12 +145,14 @@
         }
 
         function getInput(ticket) {
-            let ticketCount = document.getElementById(ticket + '-caseCount');
+            let ticketCount = document.getElementById(ticket + '-classTicket');
             let bookingTicket = parseInt(ticketCount.value);
             return bookingTicket;
         }
+
+        //alert function
         function myFunction() {
-            confirm("Press a button!");
+            confirm("Do you want to buy ticket?");
 
         }
 
