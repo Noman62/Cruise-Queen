@@ -60,22 +60,22 @@
             <div class="input-group f-class">
                 <div>
                     <label for="">First Class ($150)</label>
-                    <input id="caseCount" class="inp-style inp-width" type="number" name="" value="1">
+                    <input id="first-caseCount" class="inp-style inp-width" type="number" name="" value="0">
                 </div>
                 <div class="plus-minus-btn">
-                    <p id="increaseBtn" class="plusBtn">+ </p>
-                    <p id="decreaseBtn" class="plusBtn">-</p>
+                    <p onclick="bookingTicket('first',true)" class="plusBtn">+ </p>
+                    <p onclick="bookingTicket('first',false)" class="plusBtn">-</p>
                 </div>
             </div>
 
             <div class="input-group f-class">
                 <div>
                     <label for="">Economy ($100)</label>
-                    <input id='secondCaseCount' class="inp-style inp-width" type="text" name="" value="1">
+                    <input id='second-caseCount' class="inp-style inp-width" type="text" name="" value="0">
                 </div>
                 <div class="plus-minus-btn">
-                    <p id="secondIncreaseBtn" class="plusBtn">+ </p>
-                    <p id="secondDecreaseBtn" class="plusBtn">-</p>
+                    <p onclick="bookingTicket('second',true)" class="plusBtn">+ </p>
+                    <p onclick="bookingTicket('second',false)" class="plusBtn">-</p>
                 </div>
             </div>
             <div class="calculations">
@@ -112,66 +112,41 @@
         </div>
     </main>
     <script>
-        document.getElementById('increaseBtn').addEventListener('click', function () {
 
-            bookingTicket(true);
-
-        })
-        document.getElementById('decreaseBtn').addEventListener('click', function () {
-
-            bookingTicket(false);
-        })
-        document.getElementById('secondIncreaseBtn').addEventListener('click', function () {
-            bookingTicketSecond(true);
-        })
-        document.getElementById('secondDecreaseBtn').addEventListener('click', function () {
-            bookingTicketSecond(false);
-        })
-        function bookingTicket(isIncrease) {
-            let caseCount = document.getElementById('caseCount');
-            let number = parseInt(caseCount.value);
+        function bookingTicket(booking, isIncrease) {
+            let bookingCount = document.getElementById(booking + '-caseCount');
+            let bookingNumber = parseInt(bookingCount.value);
+            let ticketIncrease = bookingNumber;
             if (isIncrease == true) {
-                increase = number + 1;
+                ticketIncrease = bookingNumber + 1;
             }
             if (isIncrease == false) {
-                if (number > 0) {
-                    increase = number - 1;
+                if (bookingNumber > 0) {
+                    ticketIncrease = bookingNumber - 1;
                 }
                 else {
-                    increase = 0;
+                    ticketIncrease = 0;
                 }
             }
-            caseCount.value = increase;
+            bookingCount.value = ticketIncrease;
             calculateTotal();
         }
-        function bookingTicketSecond(isIncrease) {
-            let secondCaseCount = document.getElementById('secondCaseCount');
-            let number = parseInt(secondCaseCount.value);
-            if (isIncrease == true) {
-                increase = number + 1;
-            }
-            if (isIncrease == false) {
-                if (number > 0) {
-                    increase = number - 1;
-                }
-                else {
-                    increase = 0;
-                }
-            }
-            secondCaseCount.value = increase;
-            calculateTotal();
-        }
+
         function calculateTotal() {
-            let caseCount = document.getElementById('caseCount');
-            let newCaseCount = parseInt(caseCount.value);
-            let secondCaseCount = document.getElementById('secondCaseCount');
-            let newSecondCaseCount = parseInt(secondCaseCount.value);
-            let Subtotal = newCaseCount * 150 + newSecondCaseCount * 100;
+            let bookingFirstCount = getInput('first');
+            let bookingSecondCount = getInput('second')
+            let Subtotal = bookingFirstCount * 150 + bookingSecondCount * 100;
             document.getElementById('subTotal').innerText = '$' + Subtotal;
             let totalTax = Subtotal * .1;
             document.getElementById('tax').innerText = '$' + totalTax;
             let grandTotal = Subtotal + totalTax;
             document.getElementById('total').innerText = '$' + grandTotal;
+        }
+
+        function getInput(bookingInput) {
+            let bookCount = document.getElementById(bookingInput + '-caseCount');
+            let bookNewCaseCount = parseInt(bookCount.value);
+            return bookNewCaseCount;
         }
         function myFunction() {
             confirm("Press a button!");
