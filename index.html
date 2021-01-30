@@ -114,28 +114,28 @@
     <script>
 
         function bookingTicket(booking, isIncrease) {
-            let bookingCount = document.getElementById(booking + '-caseCount');
-            let bookingNumber = parseInt(bookingCount.value);
-            let ticketIncrease = bookingNumber;
+            let ticketInput = document.getElementById(booking + '-caseCount');
+            let numberOfTicket = parseInt(ticketInput.value);
+            let totalTicket = numberOfTicket;
             if (isIncrease == true) {
-                ticketIncrease = bookingNumber + 1;
+                totalTicket = numberOfTicket + 1;
             }
             if (isIncrease == false) {
-                if (bookingNumber > 0) {
-                    ticketIncrease = bookingNumber - 1;
+                if (numberOfTicket > 0) {
+                    totalTicket = numberOfTicket - 1;
                 }
                 else {
-                    ticketIncrease = 0;
+                    totalTicket = 0;
                 }
             }
-            bookingCount.value = ticketIncrease;
-            calculateTotal();
+            ticketInput.value = totalTicket;
+            totalPriceOfTicket();
         }
 
-        function calculateTotal() {
-            let bookingFirstCount = getInput('first');
-            let bookingSecondCount = getInput('second')
-            let Subtotal = bookingFirstCount * 150 + bookingSecondCount * 100;
+        function totalPriceOfTicket() {
+            let firstClassTicket = getInput('first');
+            let secondClassTicket = getInput('second')
+            let Subtotal = firstClassTicket * 150 + secondClassTicket * 100;
             document.getElementById('subTotal').innerText = '$' + Subtotal;
             let totalTax = Subtotal * .1;
             document.getElementById('tax').innerText = '$' + totalTax;
@@ -143,10 +143,10 @@
             document.getElementById('total').innerText = '$' + grandTotal;
         }
 
-        function getInput(bookingInput) {
-            let bookCount = document.getElementById(bookingInput + '-caseCount');
-            let bookNewCaseCount = parseInt(bookCount.value);
-            return bookNewCaseCount;
+        function getInput(ticket) {
+            let ticketCount = document.getElementById(ticket + '-caseCount');
+            let bookingTicket = parseInt(ticketCount.value);
+            return bookingTicket;
         }
         function myFunction() {
             confirm("Press a button!");
