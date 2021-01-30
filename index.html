@@ -84,7 +84,8 @@
                         <p>Subtotal</p>
                     </div>
                     <div class="right">
-                        <p>$500</p>
+                        <p><span id="subTotal">500</span>
+                        </p>
                     </div>
                 </div>
 
@@ -93,7 +94,7 @@
                         <p>Charge 10% VAT</p>
                     </div>
                     <div class="right">
-                        <p>$50</p>
+                        <p><span id="tax">50</span></p>
                     </div>
                 </div>
                 <hr>
@@ -102,7 +103,7 @@
                         <h4>Total</h4>
                     </div>
                     <div class="right">
-                        <p>$550</p>
+                        <p><span id="total">550</span></p>
                     </div>
                 </div>
             </div>
@@ -111,26 +112,23 @@
     </main>
     <script>
         document.getElementById('increaseBtn').addEventListener('click', function () {
-            // console.log('click me')
+
             bookingTicket(true);
 
         })
         document.getElementById('decreaseBtn').addEventListener('click', function () {
-            //console.log('click me')
+
             bookingTicket(false);
         })
         document.getElementById('secondIncreaseBtn').addEventListener('click', function () {
-            //console.log('click me')
             bookingTicketSecond(true);
         })
         document.getElementById('secondDecreaseBtn').addEventListener('click', function () {
-            //console.log('click me')
             bookingTicketSecond(false);
         })
         function bookingTicket(isIncrease) {
             let caseCount = document.getElementById('caseCount');
             let number = parseInt(caseCount.value);
-            //let increase=0;
             if (isIncrease == true) {
                 increase = number + 1;
             }
@@ -138,11 +136,11 @@
                 increase = number - 1;
             }
             caseCount.value = increase;
+            calculateTotal();
         }
         function bookingTicketSecond(isIncrease) {
             let secondCaseCount = document.getElementById('secondCaseCount');
             let number = parseInt(secondCaseCount.value);
-            //let increase;
             if (isIncrease == true) {
                 increase = number + 1;
             }
@@ -150,6 +148,19 @@
                 increase = number - 1;
             }
             secondCaseCount.value = increase;
+            calculateTotal();
+        }
+        function calculateTotal() {
+            let caseCount = document.getElementById('caseCount');
+            let newCaseCount = parseInt(caseCount.value);
+            let secondCaseCount = document.getElementById('secondCaseCount');
+            let newSecondCaseCount = parseInt(secondCaseCount.value);
+            let Subtotal = newCaseCount * 150 + newSecondCaseCount * 100;
+            document.getElementById('subTotal').innerText = '$' + Subtotal;
+            let totalTax = Subtotal * .1;
+            document.getElementById('tax').innerText = '$' + totalTax;
+            let grandTotal = Subtotal + totalTax;
+            document.getElementById('total').innerText = '$' + grandTotal;
         }
 
     </script>
